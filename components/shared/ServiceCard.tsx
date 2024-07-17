@@ -3,15 +3,15 @@ import Link from "next/link";
 import React from "react";
 
 const ServiceCard = ({ item }: any) => {
-  const { id, attributes } = item;
-  const { title, description } = attributes;
+  const { attributes } = item;
+  const { title, slug, description } = attributes;
   const imageData = attributes.phoneView.data.attributes.formats;
   const imageUrl = imageData?.medium?.url;
 
   return (
     <>
       <Link
-        href={`/service/${id}`}
+        href={`/service/${slug}`}
         className="z-10 mx-auto my-4 max-w-[357px]  rounded-xl bg-gradient-to-r from-[#C946FB] via-[#C946FB] to-[#6161FB] p-[1px]"
       >
         <div>

@@ -1,17 +1,74 @@
-import Loading from "@/app/loading";
 import TrandingSlides from "@/components/blog/TrandingSlides";
-import { fetchProductsById } from "@/lib/fetchBlogs";
 import Image from "next/image";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
+export async function generateMetadata({ params }: any) {
+  const result = await fetch(
+    `${process.env.BACKEND}/blogs?trend-blogs[slug][$eq]=${params.id}&populate=*`
+  );
+
+  const data = await result.json();
+
+  const dataResult = data.data;
+
+  const { attributes } = dataResult[0];
+
+  const { metatitle, metaauthor, metakeyword, metadescription } = attributes;
+  const imageData = attributes.desktopView.data.attributes.formats;
+  const imageUrl = imageData?.medium?.url;
+
+  const fullImageUrl = `${process.env.NEXT_PUBLIC_IMAGE_FILE}${imageUrl}`;
+
+  return {
+    title: metatitle,
+    description: metadescription,
+    type: "website",
+    applicationName: "Ranga Technology",
+    authors: [{ name: metaauthor }],
+    keywords: [metakeyword],
+
+    images: [
+      {
+        url: fullImageUrl,
+        width: 1200,
+        height: 630,
+        alt: metatitle,
+      },
+    ],
+    openGraph: {
+      title: metatitle,
+      description: metadescription,
+      type: "website",
+      applicationName: "Ranga Technology",
+      authors: [{ name: metaauthor }],
+      keywords: [metakeyword],
+      images: [
+        {
+          url: fullImageUrl,
+          width: 1200,
+          height: 630,
+          alt: metatitle,
+        },
+      ],
+    },
+  };
+}
+
 export const revalidate = 0;
 
 const SingleProduct = async ({ params }: any) => {
-  const results: any = await fetchProductsById({ id: params.id });
-  const { attributes } = results.data.data;
+  const result = await fetch(
+    `${process.env.BACKEND}/trend-blogs?filters[slug][$eq]=${params.id}&populate=*`
+  );
+
+  const data = await result.json();
+
+  const dataResult = data.data;
+
+  const { attributes } = dataResult[0];
 
   const { title, description } = attributes;
   const imageData = attributes.desktopView.data.attributes.formats;

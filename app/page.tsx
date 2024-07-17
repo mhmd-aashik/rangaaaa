@@ -4,7 +4,6 @@ import Review from "@/components/home/Review";
 import Service from "@/components/home/Service";
 import TrendBlog from "@/components/home/TrendBlog";
 import Blog from "@/components/home/TrendingBlog/Blog";
-import { fetchDbBlogs } from "@/lib/actions/user.action";
 import { fetchRatings, fetchSingleBlog } from "@/lib/fetchBlogs";
 import Image from "next/image";
 

@@ -10,15 +10,15 @@ import ReciptBlog from "./ReciptBlog";
 import Markdown from "react-markdown";
 
 interface BlogBannerProps {
-  id: string;
   title: string;
+  slug: string;
   description: any;
   desktopView: string;
 }
 
 const BlogBanner = ({
-  id,
   title,
+  slug,
   description,
   desktopView,
 }: BlogBannerProps) => {
@@ -75,7 +75,7 @@ const BlogBanner = ({
               </div>
               <div className="mt-10 flex items-center justify-between">
                 <Link
-                  href={`/trendblog/${id}`}
+                  href={`/trendblog/${slug}`}
                   className="text-[16px] font-medium text-[#5663FA] hover:text-[#D243FA] active:text-[#B529DC]"
                 >
                   Read More

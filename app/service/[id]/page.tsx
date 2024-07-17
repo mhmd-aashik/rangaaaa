@@ -10,8 +10,15 @@ import rehypeRaw from "rehype-raw";
 export const revalidate = 0;
 
 const SingleService = async ({ params }: any) => {
-  const results: any = await fetchServicesById({ id: params.id });
-  const { attributes } = results.data.data;
+  const result = await fetch(
+    `${process.env.BACKEND}/trend-services?filters[slug][$eq]=${params.id}&populate=*`
+  );
+
+  const data = await result.json();
+
+  const dataResult = data.data[0];
+
+  const { attributes } = dataResult;
 
   const { title, description } = attributes;
   const imageData = attributes.desktopView.data.attributes.formats;

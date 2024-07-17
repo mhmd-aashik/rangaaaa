@@ -3,14 +3,14 @@ import Link from "next/link";
 import React from "react";
 
 const TrendBlogId = ({ item }: any) => {
-  const { id, attributes } = item;
-  const { title, description } = attributes;
+  const { attributes } = item;
+  const { title, slug, description } = attributes;
   const imageData = attributes.phoneView.data.attributes.formats;
   const imageUrl = imageData?.medium?.url;
 
   return (
     <>
-      <Link href={`/blog/${id}`} className="max-w-[357px] ">
+      <Link href={`/blog/${slug}`} className="max-w-[357px] ">
         <div>
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${imageUrl}`}

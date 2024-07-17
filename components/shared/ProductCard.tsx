@@ -3,21 +3,21 @@ import Link from "next/link";
 import React from "react";
 
 const ProductCard = ({ item }: any) => {
-  const { id, attributes } = item;
-  const { title, description } = attributes;
+  const { attributes } = item;
+  const { title, slug, description } = attributes;
   const imageData = attributes.phoneView.data.attributes.formats;
   const imageUrl = imageData?.medium?.url;
 
   return (
     <>
       <Link
-        href={`/product/${id}`}
+        href={`/product/${slug}`}
         className="z-10 mx-auto my-4 max-w-[357px]  rounded-xl bg-gradient-to-r from-[#C946FB] via-[#C946FB] to-[#6161FB] p-[1px]"
       >
         <div>
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${imageUrl}`}
-            alt=""
+            alt={title}
             width={400}
             height={230}
             draggable="false"
