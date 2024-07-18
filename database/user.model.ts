@@ -16,6 +16,7 @@ const UserSchema = new Schema({
   },
   network: {
     type: String,
+    default: "Solana Volume",
     required: true,
   },
   email: {

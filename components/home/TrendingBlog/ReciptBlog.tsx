@@ -12,7 +12,6 @@ const details = [
 ];
 
 const ReciptBlog = () => {
-  const router = useRouter();
   return (
     <div>
       <div>

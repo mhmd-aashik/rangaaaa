@@ -1,5 +1,7 @@
 import TrandingSlides from "@/components/blog/TrandingSlides";
+import Social from "@/components/shared/Social";
 import { fetchBlogsById } from "@/lib/fetchBlogs";
+import { Link } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import ReactMarkdown from "react-markdown";
@@ -55,6 +57,22 @@ export async function generateMetadata({ params }: any) {
         },
       ],
     },
+    og: {
+      title: metatitle,
+      description: metadescription,
+      type: "website",
+      applicationName: "Ranga Technology",
+      authors: [{ name: metaauthor }],
+      keywords: [metakeyword],
+      images: [
+        {
+          url: fullImageUrl,
+          width: 1200,
+          height: 630,
+          alt: metatitle,
+        },
+      ],
+    },
   };
 }
 
@@ -93,7 +111,7 @@ const SingleBlog = async ({ params }: any) => {
         </div>
 
         <div className="mx-auto max-w-[1150px] gap-10 bg-[#020000] px-5 pb-5">
-          <div className="mt-5 rounded-3xl outline outline-1 outline-[#C946FB]">
+          <div className="mt-5 rounded-3xl outline outline-1 outline-[#C946FB] ">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${imageUrl}`}
               alt={`${title}`}
@@ -103,9 +121,12 @@ const SingleBlog = async ({ params }: any) => {
               className="max-h-[420px] rounded-t-3xl bg-center object-cover"
             />
             <div className="p-6">
-              <h2 className="h-full pb-8 font-extrabold text-[#40E9FD] sm:text-[20px] font-poppins">
-                {title}
-              </h2>
+              <div className="flex justify-between full">
+                <h2 className="h-full pb-8 font-extrabold text-[#40E9FD] sm:text-[20px] font-poppins">
+                  {title}
+                </h2>
+                <Social />
+              </div>
               <div className="prose prose-lg prose-invert max-h-full overflow-auto text-white font-poppins">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}

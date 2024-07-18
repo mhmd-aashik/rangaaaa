@@ -15,3 +15,26 @@ export async function fetchDbBlogs() {
     throw new Error("Failed to fetch blogs");
   }
 }
+
+interface UserData {
+  name: string;
+  email: string;
+  telegram: string;
+  transection: string;
+}
+
+export const postUserData = async (data: UserData) => {
+  try {
+    await connectToDatabase();
+
+    await User.create({
+      name: data.name,
+      email: data.email,
+      telegram: data.telegram,
+      transection: data.transection,
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to post user data");
+  }
+};

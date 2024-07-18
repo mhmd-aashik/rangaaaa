@@ -6,9 +6,7 @@ const ReviewCard = (data: any) => {
   const { Name, Country, Rating, Comment, Audio, Profile } = data.attributes;
 
   const imageData = Profile.data.attributes.url;
-  const audioData = Audio?.data?.attributes;
-
-  console.log(audioData, "audioData");
+//   const audioData = Audio?.data?.attributes;
 
   let stars: any;
   if (Rating === 2) {

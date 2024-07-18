@@ -33,7 +33,6 @@ const Admin = async () => {
         </TableHeader>
         <TableBody className="border">
           {userData.map((data) => {
-            console.log(data, "data");
             return (
               <TableRow key={data._id}>
                 <TableCell className="w-[200px] text-white">

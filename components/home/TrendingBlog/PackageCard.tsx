@@ -1,6 +1,6 @@
 "use client";
 import { Check, ChevronDown, ChevronsRight } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { SelectDMenuR } from "./SelectMenuR";
 
 const pakageDetails = [
@@ -93,10 +93,7 @@ const PackageCard = ({ showtelegram, setShowTelegram }: any) => {
               <p className="mt-2  text-white py-2">
                 Select Your Volume Bot Network
               </p>
-              {/* <div className="mt-2 flex justify-between rounded-full border border-[#40E9FD] p-2">
-                <p className=" text-gray-600 px-2 text-[16px]">Solana Network</p>
-                <ChevronDown className="text-white" />
-              </div> */}
+
               <div className="w-full">
                 <SelectDMenuR />
               </div>

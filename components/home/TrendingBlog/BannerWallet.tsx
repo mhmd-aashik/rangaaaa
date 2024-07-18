@@ -14,9 +14,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ChevronsRight } from "lucide-react";
-import Image from "next/image";
 import { telegramFormSchema } from "@/lib/Validate";
 import CopyToClipboard from "./CopyToClipboard";
+import { useState } from "react";
+import { postUserData } from "@/lib/actions/user.action";
 
 const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
   const handleButtonClick = () => {
@@ -26,12 +27,21 @@ const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
   const form = useForm<z.infer<typeof telegramFormSchema>>({
     resolver: zodResolver(telegramFormSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      wallet: "",
+      transection: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof telegramFormSchema>) {}
+  async function onSubmit(values: z.infer<typeof telegramFormSchema>) {
+    try {
+      await postUserData({
+        wallet: values.wallet,
+        transection: values.transection,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -60,7 +70,7 @@ const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
                   >
                     <FormField
                       control={form.control}
-                      name="email"
+                      name="wallet"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-white">
@@ -70,7 +80,7 @@ const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
                             <Input
                               placeholder="jffjwfhquhwiojfq`984mffmfnefen"
                               {...field}
-                              className="rounded-full h-10 text-[14px] border-[#40E9FD] placeholder:text-white/50 text-white/50"
+                              className="rounded-full h-10 text-[14px] pl-4 border-[#40E9FD] placeholder:text-white/50 text-white/50"
                             />
                           </FormControl>
                           <FormMessage />
@@ -80,7 +90,7 @@ const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
 
                     <FormField
                       control={form.control}
-                      name="name"
+                      name="transection"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-white">
@@ -91,7 +101,7 @@ const BannerWallet = ({ setShowRecipt, showrecipt }: any) => {
                               placeholder="Paste submit transaction address here "
                               type="text"
                               {...field}
-                              className="rounded-full h-10 text-[14px] border-[#40E9FD] placeholder:text-white/50 text-white/50"
+                              className="rounded-full h-10 text-[14px] pl-4 border-[#40E9FD] placeholder:text-white/50 text-white/50"
                             />
                           </FormControl>
                           <FormMessage />

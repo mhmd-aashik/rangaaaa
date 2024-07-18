@@ -14,22 +14,33 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ChevronsRight } from "lucide-react";
-import { telegramFormSchema } from "@/lib/Validate";
+import { blogSchema } from "@/lib/Validate";
+import { useState } from "react";
+import { postUserData } from "@/lib/actions/user.action";
 
 const BlogTeleg = ({ showForm, setShowForm }: any) => {
   const handleButtonClick = () => {
     setShowForm(false);
   };
 
-  const form = useForm<z.infer<typeof telegramFormSchema>>({
-    resolver: zodResolver(telegramFormSchema),
+  const form = useForm<z.infer<typeof blogSchema>>({
+    resolver: zodResolver(blogSchema),
     defaultValues: {
-      name: "",
+      telegram: "",
       email: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof telegramFormSchema>) {}
+  async function onSubmit(values: z.infer<typeof blogSchema>) {
+    try {
+      await postUserData({
+        email: values.email,
+        telegram: values.telegram,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -70,7 +81,7 @@ const BlogTeleg = ({ showForm, setShowForm }: any) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-white">
-                            Enter Email (Optional){" "}
+                            Enter Email Address{" "}
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -86,18 +97,18 @@ const BlogTeleg = ({ showForm, setShowForm }: any) => {
 
                     <FormField
                       control={form.control}
-                      name="name"
+                      name="telegram"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-white">
-                            Telegram ID (Optional){" "}
+                            Telegram ID{" "}
                           </FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Enter telegram ID here"
                               type="text"
                               {...field}
-                              className="rounded-full pl-4 h-10 border-[#40E9FD] placeholder:text-white/50 text-white/50"
+                              className="rounded-full h-10 text-[14px] pl-4 border-[#40E9FD] focus:border-[#40E9FD] placeholder:text-white/50 text-white/50"
                             />
                           </FormControl>
                           <FormMessage />

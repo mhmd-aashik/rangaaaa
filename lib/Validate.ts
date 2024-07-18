@@ -1,12 +1,11 @@
 import { z } from "zod";
 
-export const formSchema = z.object({
-  name: z.string().min(2).max(50),
+export const blogSchema = z.object({
+  telegram: z.string().min(2).max(50),
   email: z.string().email(),
-  description: z.string().min(10).max(500),
 });
 
 export const telegramFormSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(2).max(50),
+  wallet: z.string().min(7).max(20),
+  transection: z.string().min(2).max(50),
 });
