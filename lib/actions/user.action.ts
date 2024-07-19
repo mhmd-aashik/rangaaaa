@@ -16,14 +16,7 @@ export async function fetchDbBlogs() {
   }
 }
 
-interface UserData {
-  name: string;
-  email: string;
-  telegram: string;
-  transection: string;
-}
-
-export const postUserData = async (data: UserData) => {
+export const postUserData = async (data: any) => {
   try {
     await connectToDatabase();
 
